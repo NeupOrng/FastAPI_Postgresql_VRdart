@@ -22,4 +22,4 @@ class Darts(Base):
     dart_name = Column(String)
     price = Column(Integer)
     is_owned = Column(Boolean,default = False)
-    owner_id = Column(Integer, ForeignKey("players.id"), nullable = True)
+    player_id = Column(Integer, ForeignKey("players.id"), nullable = True)

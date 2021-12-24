@@ -25,5 +25,4 @@ class Dart(BaseModel):
     dart_name: str
     price: int
     is_owned: bool
-    owner_id: int
-    
+    player_id: int
