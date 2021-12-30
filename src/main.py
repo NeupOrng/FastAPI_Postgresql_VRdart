@@ -17,16 +17,17 @@ def get_db():
     finally:
         db.close()
 
+#home route
 @app.get("/")
 def home():
     return {"message": "welcome to VR dart backend"}
 
+
+#players route
 @app.post("/players/", response_model = schemas.PlayerCreate)
 async def create_player(player: schemas.PlayerCreate, db: Session = Depends(get_db)):
     data = jsonable_encoder(crud.create_player(player = player, db = db))
     return JSONResponse(data)
-
-
 
 @app.put("/players/", response_model = schemas.Player)
 async def edit_player(player: schemas.Player, db: Session = Depends(get_db)):
@@ -40,3 +41,12 @@ async def read_all_player(db: Session = Depends(get_db)):
 @app.get("/players/{player_id}")
 async def read_player(player_id, db: Session = Depends(get_db)):
     return crud.get_player(db=db, player_id = player_id)
+
+@app.delete("/players/{player_id}")
+async def delete_player(player_id, db: Session = Depends(get_db)):
+    return crud.remove_player_record(player_id= player_id, db=db)
+
+#darts route
+@app.delete("/darts/{dart_id}")
+async def delete_dart(dart_id, db: Session = Depends(get_db)):
+    return crud.remove_player_record(dart_id= dart_id, db=db)
